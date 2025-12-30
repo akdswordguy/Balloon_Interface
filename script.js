@@ -20,7 +20,8 @@ function renderBalloons(balloons) {
     card.className = "card";
 
     card.innerHTML = `
-      <div class="team">${b.team}</div>
+     <div class="team">${b.username}</div>
+
       <div class="location">📍 ${b.lab} – Seat ${b.seat}</div>
       <div class="time">⏱ ${new Date(b.timestamp).toLocaleTimeString()}</div>
       <button onclick="markDelivered(${b.row})">Mark Delivered</button>
