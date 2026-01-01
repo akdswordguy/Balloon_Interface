@@ -108,6 +108,7 @@
       box-shadow: 0 8px 20px rgba(2,6,23,0.6);
       position:relative;
       overflow:visible;
+      margin-top:20px;
     }
 
     .balloon-badge{
