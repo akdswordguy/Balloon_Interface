@@ -45,6 +45,32 @@ body{
   .logo{ height:50px }
 }
 
+/* Tablet - stack header items and reduce spacing */
+@media (max-width:720px){
+  .site-header{ flex-wrap:wrap; padding:12px; gap:10px }
+  .header-left{ order:1 }
+  .brand{ order:2; position:static; transform:none; width:100%; text-align:center; font-size:22px }
+  .controls{ order:3; width:100%; justify-content:flex-end }
+  .controls input[type=search]{ min-width:160px; flex:1 1 60%; }
+}
+
+/* Mobile - vertical layout, full-width controls and single column cards */
+@media (max-width:420px){
+  body{ padding:14px }
+  .site-header{ padding:10px }
+  .header-left{ width:48px }
+  .logo{ height:42px }
+  .brand{ font-size:18px; font-weight:700 }
+  .controls{ width:100%; display:flex; gap:8px; justify-content:space-between }
+  .controls input[type=search]{ min-width:0; flex:1; margin-inline:0 }
+  .controls button{ display:none }
+
+  .balloon-grid{ grid-template-columns: 1fr; gap:12px; margin-top:18px }
+  .card{ padding:12px }
+  .balloon-badge{ width:40px; height:40px; left:12px; top:-14px; font-size:16px }
+  .team, .meta, .time, .actions{ margin-left:56px }
+}
+
 .brand{
   font-family: 'Poppins', Inter, system-ui, sans-serif;
   font-weight:700;
