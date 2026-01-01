@@ -65,15 +65,20 @@ function renderBalloons(balloons){
     const actions = document.createElement('div'); actions.className='actions';
     const mark = document.createElement('button'); mark.className='primary'; mark.textContent='Mark Delivered';
     mark.setAttribute('aria-label', `Mark balloon for ${b.username} delivered`);
-    // show loading state while the mark-delivered request is in progress
     mark.onclick = async () => {
       try{
         mark.disabled = true;
         mark.classList.add('loading');
-        // inline spinner + label
         mark.innerHTML = '<span class="spinner" aria-hidden="true"></span>Marking...';
-        await markDelivered(b.row);
-        // note: fetchBalloons() will re-render the list; if it fails, restore state below
+        const ok = await markDelivered(b.row, card);
+        if(ok){
+          card.classList.add('removing');
+          setTimeout(()=> card.remove(), 380);
+        }else{
+          mark.disabled = false;
+          mark.classList.remove('loading');
+          mark.textContent = 'Mark Delivered';
+        }
       }catch(err){
         console.error('Error marking delivered', err);
         mark.disabled = false;
@@ -93,12 +98,15 @@ function renderBalloons(balloons){
   });
 }
 
-async function markDelivered(row){
+async function markDelivered(row, cardEl){
   try{
-    await fetch(`${API_URL}?action=markDelivered&row=${row}`,{method:'POST'});
-    fetchBalloons();
+    const res = await fetch(`${API_URL}?action=markDelivered&row=${row}`,{method:'POST'});
+    if(!res.ok) throw new Error('request failed');
+    allBalloons = allBalloons.filter(b => String(b.row) !== String(row));
+    return true;
   }catch(err){
     console.error('failed to mark delivered', err);
+    return false;
   }
 }
 

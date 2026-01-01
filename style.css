@@ -1,8 +1,8 @@
 :root{
-  --bg: #0f1724; /* deep navy */
+  --bg: #0f1724;
   --card: #0b1220;
   --muted: #94a3b8;
-  --accent: #ff6b6b; /* balloon color */
+  --accent: #be2121;
   --accent-2: #60a5fa;
   --glass: rgba(255,255,255,0.04);
 }
@@ -136,10 +136,9 @@ main{max-width:1100px;margin:18px auto 80px}
 }
 .actions button.primary{ 
   background:#5c7c02 ; 
-  border: rgb(194, 184, 184) solid 0.2px;
+  border: solid #31344299 2px;
 }
 
-/* loading state for primary action */
 .actions button.primary.loading{
   opacity:0.9;
   cursor:progress;
@@ -157,7 +156,8 @@ main{max-width:1100px;margin:18px auto 80px}
   .meta,.time,.actions{ margin-left:56px }
 }
 
-/* subtle float animation for balloons */
 @keyframes floaty{ 0%{ transform:translateY(0)} 50%{ transform:translateY(-6px)} 100%{ transform:translateY(0)} }
 .card:hover .balloon-badge{ animation:floaty 1.6s ease-in-out infinite }
+
+.card.removing{ opacity:0; transform:translateY(-8px) scale(0.995); transition: opacity 360ms ease, transform 360ms ease }
 
